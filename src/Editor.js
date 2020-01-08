@@ -54,6 +54,7 @@ export default class Editor extends Emitter {
       onBlur: () => {},
       onPaste: () => {},
       onDrop: () => {},
+      onTextSplitter: () => {},
     }
 
     this.events = [
@@ -64,6 +65,7 @@ export default class Editor extends Emitter {
       'blur',
       'paste',
       'drop',
+      'textSplitter',
     ]
 
     this.init(options)
@@ -281,6 +283,7 @@ export default class Editor extends Emitter {
       state: this.createState(),
       handlePaste: (...args) => { this.emit('paste', ...args) },
       handleDrop: (...args) => { this.emit('drop', ...args) },
+      handleTextSplitter: (...args) => this.emit('textSplitter', ...args),
       dispatchTransaction: this.dispatchTransaction.bind(this),
     })
   }
