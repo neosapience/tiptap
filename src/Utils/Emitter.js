@@ -42,4 +42,12 @@ export default class Emitter {
 
     return this
   }
+
+  call(event, text) {
+    this._callbacks = this._callbacks || {}
+    const callbacks = this._callbacks[event]
+    if (callbacks.length) {
+      return callbacks[0](text)
+    }
+  }
 }

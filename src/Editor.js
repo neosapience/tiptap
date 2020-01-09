@@ -283,7 +283,7 @@ export default class Editor extends Emitter {
       state: this.createState(),
       handlePaste: (...args) => { this.emit('paste', ...args) },
       handleDrop: (...args) => { this.emit('drop', ...args) },
-      handleTextSplitter: (...args) => this.emit('textSplitter', ...args),
+      handleTextSplitter: (text) => this.call('textSplitter', text),
       dispatchTransaction: this.dispatchTransaction.bind(this),
     })
   }
