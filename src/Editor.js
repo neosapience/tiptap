@@ -77,6 +77,7 @@ export default class Editor extends Emitter {
       ...options,
     })
     this.focused = false
+    this.hoveredId = null
     this.selection = { from: 0, to: 0 }
     this.element = document.createElement('div')
     this.extensions = this.createExtensions()
@@ -244,6 +245,16 @@ export default class Editor extends Emitter {
                 const transaction = this.state.tr.setMeta('focused', false)
                 this.view.dispatch(transaction)
               },
+              mouseover: (view, event) => {
+                const hoveredParagraph = event.path.find(({nodeName}) => nodeName === 'P')
+                if (!hoveredParagraph) {
+                  return 
+                } 
+
+                this.hoveredId = hoveredParagraph.dataset.paragraphId
+                const transaction = this.state.tr.setMeta('hoveredId', this.hoveredId)
+                this.view.dispatch(transaction)
+              }
             },
           },
         }),
