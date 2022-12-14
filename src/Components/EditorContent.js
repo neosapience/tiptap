@@ -26,6 +26,9 @@ export default {
   },
 
   beforeDestroy() {
+    if (!editor) {
+      return
+    }
     this.editor.element = this.$el
   },
 
