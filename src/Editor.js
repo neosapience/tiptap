@@ -246,7 +246,8 @@ export default class Editor extends Emitter {
                 this.view.dispatch(transaction)
               },
               mouseover: (view, event) => {
-                const hoveredParagraph = event.path.find(({nodeName}) => nodeName === 'P')
+                const path = event.path || (event.composedPath && event.composedPath())
+                const hoveredParagraph = path.find(({nodeName}) => nodeName === 'P')
                 if (!hoveredParagraph) {
                   return 
                 } 
