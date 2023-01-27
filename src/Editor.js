@@ -248,13 +248,11 @@ export default class Editor extends Emitter {
               mouseover: (view, event) => {
                 const path = event.path || (event.composedPath && event.composedPath())
                 const hoveredParagraph = path.find(({nodeName}) => nodeName === 'P')
-                if (!hoveredParagraph) {
+                if (!hoveredParagraph || this.hoveredId === hoveredParagraph.dataset.paragraphId) {
                   return 
                 } 
 
                 this.hoveredId = hoveredParagraph.dataset.paragraphId
-                const transaction = this.state.tr.setMeta('hoveredId', this.hoveredId)
-                this.view.dispatch(transaction)
               }
             },
           },
